@@ -1,0 +1,10 @@
+- hosts: localhost
+  tasks:
+  - name: insytall git
+    yum: name=git state=latest
+    become: yes
+    become_method: sudo
+  - name: clone repo1
+    git: clone=yes repo=https://github.com/btanami/myrepo.git dest=~/myrepo
+  - name: clone repo2
+    git: clone=yes repo=https://github.com/btanami/spring-petclinic.git dest=~/petclinic
