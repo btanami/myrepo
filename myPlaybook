@@ -5,6 +5,10 @@
     become: yes
     become_method: sudo
   - name: clone repo1
-    git: clone=yes repo=https://github.com/btanami/myrepo.git dest=~/myrepo
+    git: clone=yes repo=https://github.com/btanami/myrepo.git dest=~/myrepo update=no
   - name: clone repo2
-    git: clone=yes repo=https://github.com/btanami/spring-petclinic.git dest=~/petclinic
+    git: clone=yes repo=https://github.com/btanami/spring-petclinic.git dest=~/petclinic update=no
+  - name: create maven dir
+    file: path=~/maven state=directory mode=0755 
+  - name: install maven
+    unarchive: src=http://apache.spd.co.il/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz  dest=~/maven copy=no
