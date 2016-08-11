@@ -22,3 +22,19 @@
     lineinfile: dest=/home/ec2-user/.bash_profile insertafter="^M2=" line="export M2"
   - name: Add M2 to PATH
     lineinfile: dest=/home/ec2-user/.bash_profile regexp="^PATH=.*:$M2" insertafter="^PATH=" line="PATH=$PATH:$M2"
+  - name: install docker
+    yum: name=docker state=latest
+    become: yes
+    become_method: sudo
+  - name: Non-root access
+    user: append=yes groups=docker name=ec2-user
+    become: yes
+    become_method: sudo
+  - name: start docker
+    service: name=docker state=started
+    become: yes
+    become_method: sudo
+
+
+
+
